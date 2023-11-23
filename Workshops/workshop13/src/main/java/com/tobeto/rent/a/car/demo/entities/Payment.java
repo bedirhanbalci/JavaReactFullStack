@@ -33,7 +33,7 @@ public class Payment {
     @Column(name = "fuel_price")
     private double fuelPrice;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
 

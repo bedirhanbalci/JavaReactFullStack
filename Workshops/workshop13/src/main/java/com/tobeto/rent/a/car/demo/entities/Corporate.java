@@ -30,5 +30,4 @@ public class Corporate {
     @ManyToOne
     @JoinColumn(name = "customer_id", unique = true)
     private Customer customer;
-
 }

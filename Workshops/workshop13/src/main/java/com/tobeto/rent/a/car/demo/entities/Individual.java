@@ -32,8 +32,7 @@ public class Individual {
     @Column(name = "identification_number", unique = true)
     private String identificationNumber;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     @JoinColumn(name = "customer_id", unique = true)
     private Customer customer;
-
 }
