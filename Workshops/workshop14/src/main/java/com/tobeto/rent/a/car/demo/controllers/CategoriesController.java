@@ -3,7 +3,11 @@ package com.tobeto.rent.a.car.demo.controllers;
 import com.tobeto.rent.a.car.demo.services.abstracts.CategoryService;
 import com.tobeto.rent.a.car.demo.services.dtos.category.requests.AddCategoryRequest;
 import com.tobeto.rent.a.car.demo.services.dtos.category.requests.UpdateCategoryRequest;
+import com.tobeto.rent.a.car.demo.services.dtos.category.responses.GetAllCategoriesResponse;
+import com.tobeto.rent.a.car.demo.services.dtos.category.responses.GetCategoryResponse;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 // Single Responsibility
@@ -34,5 +38,15 @@ public class CategoriesController {
     @PutMapping
     public void update(@RequestBody UpdateCategoryRequest updateCategoryRequest) {
         categoryService.update(updateCategoryRequest);
+    }
+
+    @GetMapping("{id}")
+    public GetCategoryResponse getById(@PathVariable int id) {
+        return categoryService.getById(id);
+    }
+
+    @GetMapping
+    public List<GetAllCategoriesResponse> getAll() {
+        return categoryService.getAll();
     }
 }

@@ -5,7 +5,12 @@ import com.tobeto.rent.a.car.demo.repositories.CategoryRepository;
 import com.tobeto.rent.a.car.demo.services.abstracts.CategoryService;
 import com.tobeto.rent.a.car.demo.services.dtos.category.requests.AddCategoryRequest;
 import com.tobeto.rent.a.car.demo.services.dtos.category.requests.UpdateCategoryRequest;
+import com.tobeto.rent.a.car.demo.services.dtos.category.responses.GetAllCategoriesResponse;
+import com.tobeto.rent.a.car.demo.services.dtos.category.responses.GetCategoryResponse;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 // Manager
 @Service
@@ -37,4 +42,24 @@ public class CategoryManager implements CategoryService {
         categoryRepository.save(categoryToUpdate);
     }
 
+    @Override
+    public GetCategoryResponse getById(int id) {
+        Category categoryToId = categoryRepository.findById(id).orElseThrow();
+        GetCategoryResponse getCategoryResponse = new GetCategoryResponse();
+        getCategoryResponse.setName(categoryToId.getName());
+        return getCategoryResponse;
+    }
+
+    @Override
+    public List<GetAllCategoriesResponse> getAll() {
+        List<Category> categoryList = categoryRepository.findAll();
+        List<GetAllCategoriesResponse> getAllCategoriesResponseList = new ArrayList<>();
+        for (Category category : categoryList) {
+            GetAllCategoriesResponse getAllCategoriesResponse = new GetAllCategoriesResponse();
+            getAllCategoriesResponse.setId(category.getId());
+            getAllCategoriesResponse.setName(category.getName());
+            getAllCategoriesResponseList.add(getAllCategoriesResponse);
+        }
+        return getAllCategoriesResponseList;
+    }
 }

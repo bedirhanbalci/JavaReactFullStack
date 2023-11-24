@@ -2,6 +2,10 @@ package com.tobeto.rent.a.car.demo.services.abstracts;
 
 import com.tobeto.rent.a.car.demo.services.dtos.rental.requests.AddRentalRequest;
 import com.tobeto.rent.a.car.demo.services.dtos.rental.requests.UpdateRentalRequest;
+import com.tobeto.rent.a.car.demo.services.dtos.rental.responses.GetAllRentalsResponse;
+import com.tobeto.rent.a.car.demo.services.dtos.rental.responses.GetRentalResponse;
+
+import java.util.List;
 
 public interface RentalService {
 
@@ -10,4 +14,8 @@ public interface RentalService {
     void delete(int id);
 
     void update(UpdateRentalRequest updateRentalRequest);
+
+    GetRentalResponse getById(int id);
+
+    List<GetAllRentalsResponse> getAll();
 }

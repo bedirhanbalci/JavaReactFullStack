@@ -5,7 +5,12 @@ import com.tobeto.rent.a.car.demo.repositories.PriceRepository;
 import com.tobeto.rent.a.car.demo.services.abstracts.PriceService;
 import com.tobeto.rent.a.car.demo.services.dtos.price.requests.AddPriceRequest;
 import com.tobeto.rent.a.car.demo.services.dtos.price.requests.UpdatePriceRequest;
+import com.tobeto.rent.a.car.demo.services.dtos.price.responses.GetAllPricesResponse;
+import com.tobeto.rent.a.car.demo.services.dtos.price.responses.GetPriceResponse;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class PriceManager implements PriceService {
@@ -35,5 +40,28 @@ public class PriceManager implements PriceService {
         priceToUpdate.setOption(updatePriceRequest.getOptionId());
         priceToUpdate.setPayment(updatePriceRequest.getPaymentId());
         priceRepository.save(priceToUpdate);
+    }
+
+    @Override
+    public GetPriceResponse getById(int id) {
+        Price priceToId = priceRepository.findById(id).orElseThrow();
+        GetPriceResponse getPriceResponse = new GetPriceResponse();
+        getPriceResponse.setOptionId(priceToId.getOption());
+        getPriceResponse.setPaymentId(priceToId.getPayment());
+        return getPriceResponse;
+    }
+
+    @Override
+    public List<GetAllPricesResponse> getAll() {
+        List<Price> priceList = priceRepository.findAll();
+        List<GetAllPricesResponse> getAllPricesResponseList = new ArrayList<>();
+        for (Price price : priceList) {
+            GetAllPricesResponse getAllPricesResponse = new GetAllPricesResponse();
+            getAllPricesResponse.setId(price.getId());
+            getAllPricesResponse.setOptionId(price.getOption());
+            getAllPricesResponse.setPaymentId(price.getPayment());
+            getAllPricesResponseList.add(getAllPricesResponse);
+        }
+        return getAllPricesResponseList;
     }
 }
