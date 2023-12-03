@@ -6,6 +6,7 @@ import com.tobeto.rent.a.car.demo.services.abstracts.PriceService;
 import com.tobeto.rent.a.car.demo.services.dtos.price.requests.AddPriceRequest;
 import com.tobeto.rent.a.car.demo.services.dtos.price.requests.UpdatePriceRequest;
 import com.tobeto.rent.a.car.demo.services.dtos.price.responses.GetAllPricesResponse;
+import com.tobeto.rent.a.car.demo.services.dtos.price.responses.GetListPriceResponse;
 import com.tobeto.rent.a.car.demo.services.dtos.price.responses.GetPriceResponse;
 import org.springframework.stereotype.Service;
 
@@ -63,5 +64,15 @@ public class PriceManager implements PriceService {
             getAllPricesResponseList.add(getAllPricesResponse);
         }
         return getAllPricesResponseList;
+    }
+
+    @Override
+    public List<Price> getByOrderByOptionId() {
+        return priceRepository.findByOrderByOptionId();
+    }
+
+    @Override
+    public List<GetListPriceResponse> getByOrderByPaymentId() {
+        return priceRepository.findByOrderByPaymentId();
     }
 }

@@ -1,9 +1,11 @@
 package com.tobeto.rent.a.car.demo.controllers;
 
+import com.tobeto.rent.a.car.demo.entities.Price;
 import com.tobeto.rent.a.car.demo.services.abstracts.PriceService;
 import com.tobeto.rent.a.car.demo.services.dtos.price.requests.AddPriceRequest;
 import com.tobeto.rent.a.car.demo.services.dtos.price.requests.UpdatePriceRequest;
 import com.tobeto.rent.a.car.demo.services.dtos.price.responses.GetAllPricesResponse;
+import com.tobeto.rent.a.car.demo.services.dtos.price.responses.GetListPriceResponse;
 import com.tobeto.rent.a.car.demo.services.dtos.price.responses.GetPriceResponse;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,8 +40,18 @@ public class PricesController {
         return priceService.getById(id);
     }
 
-    @GetMapping
+    @GetMapping("all")
     public List<GetAllPricesResponse> getAll() {
         return priceService.getAll();
+    }
+
+    @GetMapping("orderByOption")
+    public List<Price> getByOrderByOptionId() {
+        return priceService.getByOrderByOptionId();
+    }
+
+    @GetMapping("orderByPayment")
+    public List<GetListPriceResponse> getByOrderByPaymentId() {
+        return priceService.getByOrderByPaymentId();
     }
 }

@@ -1,9 +1,11 @@
 package com.tobeto.rent.a.car.demo.controllers;
 
+import com.tobeto.rent.a.car.demo.entities.Payment;
 import com.tobeto.rent.a.car.demo.services.abstracts.PaymentService;
 import com.tobeto.rent.a.car.demo.services.dtos.payment.requests.AddPaymentRequest;
 import com.tobeto.rent.a.car.demo.services.dtos.payment.requests.UpdatePaymentRequest;
 import com.tobeto.rent.a.car.demo.services.dtos.payment.responses.GetAllPaymentsResponse;
+import com.tobeto.rent.a.car.demo.services.dtos.payment.responses.GetListPaymentResponse;
 import com.tobeto.rent.a.car.demo.services.dtos.payment.responses.GetPaymentResponse;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,8 +40,28 @@ public class PaymentsController {
         return paymentService.getById(id);
     }
 
-    @GetMapping
+    @GetMapping("all")
     public List<GetAllPaymentsResponse> getAll() {
         return paymentService.getAll();
+    }
+
+    @GetMapping("dailyGreater")
+    public List<Payment> getByDailyPriceGreaterThan(@RequestParam double dailyPrice) {
+        return paymentService.getByDailyPriceGreaterThan(dailyPrice);
+    }
+
+    @GetMapping("orderByWeekly")
+    public List<Payment> getByOrderByWeeklyPrice() {
+        return paymentService.getByOrderByWeeklyPrice();
+    }
+
+    @GetMapping("distinctMonthly")
+    public List<Payment> getDistinctByMonthlyPrice(@RequestParam double monthlyPrice) {
+        return paymentService.getDistinctByMonthlyPrice(monthlyPrice);
+    }
+
+    @GetMapping("monthly")
+    public List<GetListPaymentResponse> getByMonthlyPrice(@RequestParam double monthlyPrice) {
+        return paymentService.getByMonthlyPrice(monthlyPrice);
     }
 }

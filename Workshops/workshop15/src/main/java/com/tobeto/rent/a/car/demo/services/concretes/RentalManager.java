@@ -6,6 +6,7 @@ import com.tobeto.rent.a.car.demo.services.abstracts.RentalService;
 import com.tobeto.rent.a.car.demo.services.dtos.rental.requests.AddRentalRequest;
 import com.tobeto.rent.a.car.demo.services.dtos.rental.requests.UpdateRentalRequest;
 import com.tobeto.rent.a.car.demo.services.dtos.rental.responses.GetAllRentalsResponse;
+import com.tobeto.rent.a.car.demo.services.dtos.rental.responses.GetListRentalResponse;
 import com.tobeto.rent.a.car.demo.services.dtos.rental.responses.GetRentalResponse;
 import org.springframework.stereotype.Service;
 
@@ -76,5 +77,15 @@ public class RentalManager implements RentalService {
             getAllRentalsResponseList.add(getAllRentalsResponse);
         }
         return getAllRentalsResponseList;
+    }
+
+    @Override
+    public List<Rental> getByOrderByPaymentId() {
+        return rentalRepository.findByOrderByPaymentId();
+    }
+
+    @Override
+    public List<GetListRentalResponse> getByReservationOrderByCustomerId() {
+        return rentalRepository.findByReservationOrderByCustomerId();
     }
 }

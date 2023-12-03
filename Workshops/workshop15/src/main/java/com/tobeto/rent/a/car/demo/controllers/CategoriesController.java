@@ -1,10 +1,12 @@
 package com.tobeto.rent.a.car.demo.controllers;
 
+import com.tobeto.rent.a.car.demo.entities.Category;
 import com.tobeto.rent.a.car.demo.services.abstracts.CategoryService;
 import com.tobeto.rent.a.car.demo.services.dtos.category.requests.AddCategoryRequest;
 import com.tobeto.rent.a.car.demo.services.dtos.category.requests.UpdateCategoryRequest;
 import com.tobeto.rent.a.car.demo.services.dtos.category.responses.GetAllCategoriesResponse;
 import com.tobeto.rent.a.car.demo.services.dtos.category.responses.GetCategoryResponse;
+import com.tobeto.rent.a.car.demo.services.dtos.category.responses.GetListCategoryResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -45,8 +47,18 @@ public class CategoriesController {
         return categoryService.getById(id);
     }
 
-    @GetMapping
+    @GetMapping("all")
     public List<GetAllCategoriesResponse> getAll() {
         return categoryService.getAll();
+    }
+
+    @GetMapping("name")
+    public List<Category> getByName(@RequestParam String name) {
+        return categoryService.getByName(name);
+    }
+
+    @GetMapping("dto")
+    public List<GetListCategoryResponse> getByNameDto(@RequestParam String name) {
+        return categoryService.getByNameDto(name);
     }
 }

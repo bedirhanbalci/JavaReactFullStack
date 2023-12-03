@@ -6,6 +6,7 @@ import com.tobeto.rent.a.car.demo.services.abstracts.OptionService;
 import com.tobeto.rent.a.car.demo.services.dtos.option.requests.AddOptionRequest;
 import com.tobeto.rent.a.car.demo.services.dtos.option.requests.UpdateOptionRequest;
 import com.tobeto.rent.a.car.demo.services.dtos.option.responses.GetAllOptionsResponse;
+import com.tobeto.rent.a.car.demo.services.dtos.option.responses.GetListOptionResponse;
 import com.tobeto.rent.a.car.demo.services.dtos.option.responses.GetOptionResponse;
 import org.springframework.stereotype.Service;
 
@@ -67,5 +68,20 @@ public class OptionManager implements OptionService {
             getAllOptionsResponseList.add(getAllOptionsResponse);
         }
         return getAllOptionsResponseList;
+    }
+
+    @Override
+    public List<Option> getByOrderByRentalCancellationPriceDesc() {
+        return optionRepository.findByOrderByRentalCancellationPriceDesc();
+    }
+
+    @Override
+    public List<GetListOptionResponse> getByDriverPriceGreaterThanEqual(double additionalDriverPrice) {
+        return optionRepository.findByAdditionalDriverPriceGreaterThanEqual(additionalDriverPrice);
+    }
+
+    @Override
+    public List<GetListOptionResponse> getByAssistancePriceLessThan(double roadsideAssistancePrice) {
+        return optionRepository.findByRoadsideAssistancePriceLessThan(roadsideAssistancePrice);
     }
 }

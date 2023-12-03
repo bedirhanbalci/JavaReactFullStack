@@ -7,6 +7,7 @@ import com.tobeto.rent.a.car.demo.services.dtos.category.requests.AddCategoryReq
 import com.tobeto.rent.a.car.demo.services.dtos.category.requests.UpdateCategoryRequest;
 import com.tobeto.rent.a.car.demo.services.dtos.category.responses.GetAllCategoriesResponse;
 import com.tobeto.rent.a.car.demo.services.dtos.category.responses.GetCategoryResponse;
+import com.tobeto.rent.a.car.demo.services.dtos.category.responses.GetListCategoryResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -61,5 +62,29 @@ public class CategoryManager implements CategoryService {
             getAllCategoriesResponseList.add(getAllCategoriesResponse);
         }
         return getAllCategoriesResponseList;
+    }
+
+    @Override
+    public List<Category> getByName(String name) {
+        return categoryRepository.findByNameStartingWith(name);
+    }
+
+    @Override
+    public List<GetListCategoryResponse> getByNameDto(String name) {
+
+        // TODO: Yaklaşım 1: Repository'den List<Category>'yi alıp Service katmanında Map'leyerek DTO türüne çevirmek.
+
+//        List<Category> categories = categoryRepository.findByNameStartingWith(name);
+//        List<GetListCategoryResponse> getListCategoryResponses = new ArrayList<>();
+//
+//        for (Category category : categories) {
+//            getListCategoryResponses.add(new GetListCategoryResponse(category.getName()));
+//
+//        }
+
+        // TODO: Yaklaşım 2: Repository'de List<GetListCategoryResponse> dönebilen yeni bir metot oluşturmak. (Stream api'ler ile)
+        return categoryRepository.findByName(name);
+
+
     }
 }

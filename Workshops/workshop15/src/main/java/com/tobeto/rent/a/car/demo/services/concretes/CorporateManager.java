@@ -7,6 +7,7 @@ import com.tobeto.rent.a.car.demo.services.dtos.corporate.requests.AddCorporateR
 import com.tobeto.rent.a.car.demo.services.dtos.corporate.requests.UpdateCorporateRequest;
 import com.tobeto.rent.a.car.demo.services.dtos.corporate.responses.GetAllCorporatesResponse;
 import com.tobeto.rent.a.car.demo.services.dtos.corporate.responses.GetCorporateResponse;
+import com.tobeto.rent.a.car.demo.services.dtos.corporate.responses.GetListCorporateResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -74,5 +75,25 @@ public class CorporateManager implements CorporateService {
             getAllCorporatesResponseList.add(getAllCorporatesResponse);
         }
         return getAllCorporatesResponseList;
+    }
+
+    @Override
+    public List<Corporate> getByCompanyName(String companyName) {
+        return corporateRepository.findByCompanyName(companyName);
+    }
+
+    @Override
+    public List<GetListCorporateResponse> getByContactTitleILike() {
+        return corporateRepository.findByContactTitleILike();
+    }
+
+    @Override
+    public List<GetListCorporateResponse> getByCompanyNameAndContactTitle() {
+        return corporateRepository.findByCompanyNameAndContactTitle();
+    }
+
+    @Override
+    public List<GetListCorporateResponse> getOrderByContactName() {
+        return corporateRepository.findOrderByContactName();
     }
 }

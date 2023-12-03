@@ -7,6 +7,7 @@ import com.tobeto.rent.a.car.demo.services.dtos.car.requests.AddCarRequest;
 import com.tobeto.rent.a.car.demo.services.dtos.car.requests.UpdateCarRequest;
 import com.tobeto.rent.a.car.demo.services.dtos.car.responses.GetAllCarsResponse;
 import com.tobeto.rent.a.car.demo.services.dtos.car.responses.GetCarResponse;
+import com.tobeto.rent.a.car.demo.services.dtos.car.responses.GetListCarResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -80,5 +81,25 @@ public class CarManager implements CarService {
             getAllCarsResponseList.add(getAllCarsResponse);
         }
         return getAllCarsResponseList;
+    }
+
+    @Override
+    public List<Car> getByBrand(String brand) {
+        return carRepository.findByBrandStartingWith(brand);
+    }
+
+    @Override
+    public List<GetListCarResponse> getByStatus() {
+        return carRepository.findByStatus();
+    }
+
+    @Override
+    public List<GetListCarResponse> getOrderByYear() {
+        return carRepository.findOrderByYear();
+    }
+
+    @Override
+    public List<GetListCarResponse> getByBrandAndColor() {
+        return carRepository.findByBrandAndColor();
     }
 }

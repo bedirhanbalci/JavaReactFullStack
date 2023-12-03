@@ -1,10 +1,12 @@
 package com.tobeto.rent.a.car.demo.controllers;
 
+import com.tobeto.rent.a.car.demo.entities.Customer;
 import com.tobeto.rent.a.car.demo.services.abstracts.CustomerService;
 import com.tobeto.rent.a.car.demo.services.dtos.customer.requests.AddCustomerRequest;
 import com.tobeto.rent.a.car.demo.services.dtos.customer.requests.UpdateCustomerRequest;
 import com.tobeto.rent.a.car.demo.services.dtos.customer.responses.GetAllCustomersResponse;
 import com.tobeto.rent.a.car.demo.services.dtos.customer.responses.GetCustomerResponse;
+import com.tobeto.rent.a.car.demo.services.dtos.customer.responses.GetListCustomerResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,8 +41,23 @@ public class CustomersController {
         return customerService.getById(id);
     }
 
-    @GetMapping
+    @GetMapping("all")
     public List<GetAllCustomersResponse> getAll() {
         return customerService.getAll();
+    }
+
+    @GetMapping("phone")
+    public List<Customer> getByPhone(@RequestParam String phone) {
+        return customerService.getByPhone(phone);
+    }
+
+    @GetMapping("emailLike")
+    public List<GetListCustomerResponse> getByEmailLike() {
+        return customerService.getByEmailLike();
+    }
+
+    @GetMapping("addressNotNull")
+    public List<GetListCustomerResponse> getByAddressNotNull() {
+        return customerService.getByAddressNotNull();
     }
 }

@@ -1,9 +1,11 @@
 package com.tobeto.rent.a.car.demo.controllers;
 
+import com.tobeto.rent.a.car.demo.entities.Rental;
 import com.tobeto.rent.a.car.demo.services.abstracts.RentalService;
 import com.tobeto.rent.a.car.demo.services.dtos.rental.requests.AddRentalRequest;
 import com.tobeto.rent.a.car.demo.services.dtos.rental.requests.UpdateRentalRequest;
 import com.tobeto.rent.a.car.demo.services.dtos.rental.responses.GetAllRentalsResponse;
+import com.tobeto.rent.a.car.demo.services.dtos.rental.responses.GetListRentalResponse;
 import com.tobeto.rent.a.car.demo.services.dtos.rental.responses.GetRentalResponse;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,8 +40,18 @@ public class RentalsController {
         return rentalService.getById(id);
     }
 
-    @GetMapping
+    @GetMapping("all")
     public List<GetAllRentalsResponse> getAll() {
         return rentalService.getAll();
+    }
+
+    @GetMapping("orderByPayment")
+    public List<Rental> getByOrderByPaymentId() {
+        return rentalService.getByOrderByPaymentId();
+    }
+
+    @GetMapping("reservationOrderByCustomer")
+    public List<GetListRentalResponse> getByReservationOrderByCustomerId() {
+        return rentalService.getByReservationOrderByCustomerId();
     }
 }

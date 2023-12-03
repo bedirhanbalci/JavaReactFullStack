@@ -1,10 +1,12 @@
 package com.tobeto.rent.a.car.demo.controllers;
 
+import com.tobeto.rent.a.car.demo.entities.Corporate;
 import com.tobeto.rent.a.car.demo.services.abstracts.CorporateService;
 import com.tobeto.rent.a.car.demo.services.dtos.corporate.requests.AddCorporateRequest;
 import com.tobeto.rent.a.car.demo.services.dtos.corporate.requests.UpdateCorporateRequest;
 import com.tobeto.rent.a.car.demo.services.dtos.corporate.responses.GetAllCorporatesResponse;
 import com.tobeto.rent.a.car.demo.services.dtos.corporate.responses.GetCorporateResponse;
+import com.tobeto.rent.a.car.demo.services.dtos.corporate.responses.GetListCorporateResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,8 +41,28 @@ public class CorporatesController {
         return corporateService.getById(id);
     }
 
-    @GetMapping
+    @GetMapping("all")
     public List<GetAllCorporatesResponse> getAll() {
         return corporateService.getAll();
+    }
+
+    @GetMapping("companyName")
+    public List<Corporate> getByCompanyName(@RequestParam String companyName) {
+        return corporateService.getByCompanyName(companyName);
+    }
+
+    @GetMapping("iLike")
+    public List<GetListCorporateResponse> getByContactTitleILike() {
+        return corporateService.getByContactTitleILike();
+    }
+
+    @GetMapping("and")
+    public List<GetListCorporateResponse> getByCompanyNameAndContactTitle() {
+        return corporateService.getByCompanyNameAndContactTitle();
+    }
+
+    @GetMapping("orderBy")
+    public List<GetListCorporateResponse> getOrderByContactName() {
+        return corporateService.getOrderByContactName();
     }
 }

@@ -7,8 +7,10 @@ import com.tobeto.rent.a.car.demo.services.dtos.date.requests.AddDateRequest;
 import com.tobeto.rent.a.car.demo.services.dtos.date.requests.UpdateDateRequest;
 import com.tobeto.rent.a.car.demo.services.dtos.date.responses.GetAllDatesResponse;
 import com.tobeto.rent.a.car.demo.services.dtos.date.responses.GetDateResponse;
+import com.tobeto.rent.a.car.demo.services.dtos.date.responses.GetListDateResponse;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,5 +70,20 @@ public class DateManager implements DateService {
             getAllDatesResponseList.add(getAllDatesResponse);
         }
         return getAllDatesResponseList;
+    }
+
+    @Override
+    public List<Date> getByStartDate(LocalDate startDate) {
+        return dateRepository.findByStartDate(startDate);
+    }
+
+    @Override
+    public List<GetListDateResponse> getByDateBetween(LocalDate startDate, LocalDate endDate) {
+        return dateRepository.findByDateBetween(startDate, endDate);
+    }
+
+    @Override
+    public List<GetListDateResponse> getByExtendDateIsNull() {
+        return dateRepository.findByExtendDateIsNull();
     }
 }

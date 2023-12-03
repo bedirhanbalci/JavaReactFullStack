@@ -6,6 +6,7 @@ import com.tobeto.rent.a.car.demo.services.abstracts.LocationService;
 import com.tobeto.rent.a.car.demo.services.dtos.location.requests.AddLocationRequest;
 import com.tobeto.rent.a.car.demo.services.dtos.location.requests.UpdateLocationRequest;
 import com.tobeto.rent.a.car.demo.services.dtos.location.responses.GetAllLocationsResponse;
+import com.tobeto.rent.a.car.demo.services.dtos.location.responses.GetListLocationResponse;
 import com.tobeto.rent.a.car.demo.services.dtos.location.responses.GetLocationResponse;
 import org.springframework.stereotype.Service;
 
@@ -64,5 +65,30 @@ public class LocationManager implements LocationService {
             getAllLocationsResponseList.add(getAllLocationsResponse);
         }
         return getAllLocationsResponseList;
+    }
+
+    @Override
+    public List<Location> getByPickUp(String pickUpLocation) {
+        return locationRepository.findByPickUpLocationEndingWith(pickUpLocation);
+    }
+
+    @Override
+    public List<Location> getByDropOff(String dropOffLocation) {
+        return locationRepository.findByDropOffLocationEndingWith(dropOffLocation);
+    }
+
+    @Override
+    public List<GetListLocationResponse> getByPickUpOrDropOff() {
+        return locationRepository.findByPickUpOrDropOff();
+    }
+
+    @Override
+    public List<GetListLocationResponse> getByPickUpILike() {
+        return locationRepository.findByPickUpILike();
+    }
+
+    @Override
+    public List<GetListLocationResponse> getOrderByPickUp() {
+        return locationRepository.findOrderByPickUp();
     }
 }

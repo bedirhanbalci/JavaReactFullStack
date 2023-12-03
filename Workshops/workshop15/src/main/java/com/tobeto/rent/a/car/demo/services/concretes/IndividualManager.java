@@ -7,6 +7,7 @@ import com.tobeto.rent.a.car.demo.services.dtos.individual.requests.AddIndividua
 import com.tobeto.rent.a.car.demo.services.dtos.individual.requests.UpdateIndividualRequest;
 import com.tobeto.rent.a.car.demo.services.dtos.individual.responses.GetAllIndividualsResponse;
 import com.tobeto.rent.a.car.demo.services.dtos.individual.responses.GetIndividualResponse;
+import com.tobeto.rent.a.car.demo.services.dtos.individual.responses.GetListIndividualResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -77,5 +78,25 @@ public class IndividualManager implements IndividualService {
             getAllIndividualsResponseList.add(getAllIndividualsResponse);
         }
         return getAllIndividualsResponseList;
+    }
+
+    @Override
+    public List<Individual> getByName(String name) {
+        return individualRepository.findByNameStartingWith(name);
+    }
+
+    @Override
+    public List<Individual> getBySurname(String surname) {
+        return individualRepository.findBySurnameStartingWith(surname);
+    }
+
+    @Override
+    public List<GetListIndividualResponse> getByGender() {
+        return individualRepository.findByGender();
+    }
+
+    @Override
+    public List<GetListIndividualResponse> getOrderByBirthDate() {
+        return individualRepository.findOrderByBirthDate();
     }
 }

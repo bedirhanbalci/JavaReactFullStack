@@ -6,6 +6,7 @@ import com.tobeto.rent.a.car.demo.services.abstracts.PaymentService;
 import com.tobeto.rent.a.car.demo.services.dtos.payment.requests.AddPaymentRequest;
 import com.tobeto.rent.a.car.demo.services.dtos.payment.requests.UpdatePaymentRequest;
 import com.tobeto.rent.a.car.demo.services.dtos.payment.responses.GetAllPaymentsResponse;
+import com.tobeto.rent.a.car.demo.services.dtos.payment.responses.GetListPaymentResponse;
 import com.tobeto.rent.a.car.demo.services.dtos.payment.responses.GetPaymentResponse;
 import org.springframework.stereotype.Service;
 
@@ -74,5 +75,25 @@ public class PaymentManager implements PaymentService {
             getAllPaymentsResponseList.add(getAllPaymentsResponse);
         }
         return getAllPaymentsResponseList;
+    }
+
+    @Override
+    public List<Payment> getByDailyPriceGreaterThan(double dailyPrice) {
+        return paymentRepository.findByDailyPriceGreaterThan(dailyPrice);
+    }
+
+    @Override
+    public List<Payment> getByOrderByWeeklyPrice() {
+        return paymentRepository.findByOrderByWeeklyPrice();
+    }
+
+    @Override
+    public List<Payment> getDistinctByMonthlyPrice(double monthlyPrice) {
+        return paymentRepository.findDistinctByMonthlyPrice(monthlyPrice);
+    }
+
+    @Override
+    public List<GetListPaymentResponse> getByMonthlyPrice(double monthlyPrice) {
+        return paymentRepository.findByMonthlyPrice(monthlyPrice);
     }
 }

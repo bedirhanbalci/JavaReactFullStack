@@ -7,6 +7,7 @@ import com.tobeto.rent.a.car.demo.services.dtos.customer.requests.AddCustomerReq
 import com.tobeto.rent.a.car.demo.services.dtos.customer.requests.UpdateCustomerRequest;
 import com.tobeto.rent.a.car.demo.services.dtos.customer.responses.GetAllCustomersResponse;
 import com.tobeto.rent.a.car.demo.services.dtos.customer.responses.GetCustomerResponse;
+import com.tobeto.rent.a.car.demo.services.dtos.customer.responses.GetListCustomerResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -68,5 +69,20 @@ public class CustomerManager implements CustomerService {
             getAllCustomersResponseList.add(getAllCustomersResponse);
         }
         return getAllCustomersResponseList;
+    }
+
+    @Override
+    public List<Customer> getByPhone(String phone) {
+        return customerRepository.findByPhone(phone);
+    }
+
+    @Override
+    public List<GetListCustomerResponse> getByEmailLike() {
+        return customerRepository.findByEmailLike();
+    }
+
+    @Override
+    public List<GetListCustomerResponse> getByAddressNotNull() {
+        return customerRepository.findByAddressNotNull();
     }
 }
