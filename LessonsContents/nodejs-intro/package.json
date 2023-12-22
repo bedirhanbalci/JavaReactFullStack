@@ -1,0 +1,8 @@
+{
+	"name": "myproject",
+	"version": "1.0.0",
+	"description": "Nodejs intro project",
+	"main": "index.js",
+	"author": "",
+	"license": "ISC"
+}
