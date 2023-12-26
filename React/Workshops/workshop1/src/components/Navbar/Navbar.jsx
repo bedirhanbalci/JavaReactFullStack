@@ -30,8 +30,13 @@ export default function Navbar() {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link " aria-current="page" to="About">
+              <Link className="nav-link " aria-current="page" to="about">
                 Hakkında
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link " aria-current="page" to="add-product">
+                Ürün Ekleme
               </Link>
             </li>
           </ul>
