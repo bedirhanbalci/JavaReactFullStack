@@ -1,22 +1,20 @@
-package com.tobeto.rent.a.car.demo.services.dtos.user.requests;
+package com.tobeto.rent.a.car.demo.services.dtos.auth.requests;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UpdateUserRequest {
-
-    private int id;
-
-    private String username;
+public class RegisterRequest {
 
     private String email;
 
-    private String password;
+    private String username;
 
-    private String role;
+    private String password;
 
 }
